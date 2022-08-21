@@ -19,7 +19,7 @@ def run():
             print(idx)
 
         try:
-            string = inputimeout(prompt='Pause for an hour?', timeout=0.3)
+            string = inputimeout(prompt='Pause for a while?', timeout=0.3)
             print("Sleep for 25 mins")
 
             return

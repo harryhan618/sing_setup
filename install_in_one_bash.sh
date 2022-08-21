@@ -7,4 +7,4 @@ conda activate research
 which python
 pip install inputimeout
 
-python singularity_voidrun.py
+python ~/sing_setup/singularity_voidrun.py
