@@ -3,7 +3,8 @@ from inputimeout import inputimeout, TimeoutOccurred
 import torch
 import torchvision.models as models
 
-device = "cuda:1"
+device_cnt =  torch.cuda.device_count()
+device = "cuda:{}".format(device_cnt-1)
 
 def run():
     idx = 0
@@ -18,7 +19,7 @@ def run():
             print(idx)
 
         try:
-            string = inputimeout(prompt='Pause for an hour?', timeout=0.5)
+            string = inputimeout(prompt='Pause for an hour?', timeout=0.3)
             print("Sleep for 25 mins")
 
             return
