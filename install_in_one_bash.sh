@@ -1,8 +1,19 @@
-conda init bash
-conda create --name research --file research_conda.txt
 
+
+# openssh
 sudo apt update
 sudo apt upgrade openssh-server -y
+
+# nccl
+sudo apt update
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb
+sudo apt install libnccl2 libnccl-dev
+
+
+# torch
+conda init bash
+conda create --name research --file research_conda.txt
 
 eval "$(conda shell.bash hook)"
 conda activate research
