@@ -1,3 +1,7 @@
+echo "" >> ~/.profile
+echo "cd ~" >> ~/.profile
+echo "source ~/.bashrc" >> ~/.profile
+
 
 
 # openssh
@@ -6,8 +10,9 @@ sudo apt upgrade openssh-server -y
 
 # nccl
 sudo apt update
-sudo dpkg -i cuda-keyring_1.0-1_all.deb
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt update
 sudo apt install libnccl2 libnccl-dev
 
 
