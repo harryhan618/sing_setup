@@ -2,7 +2,7 @@ echo "" >> ~/.profile
 echo "cd ~" >> ~/.profile
 echo "source ~/.bashrc" >> ~/.profile
 
-
+cd ~
 
 # openssh
 sudo apt update
