@@ -34,13 +34,15 @@ conda activate megatronlm
 conda install python=3.9 -y
 conda install ipython -y
 pip install packaging
-pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
+pip3 install numpy==1.23.5 torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
 cd /home/aiscuser/Software/apex
 python setup.py develop --cpp_ext --cuda_ext
 cd ~
 git clone https://github.com/NVIDIA/Megatron-LM
 cd Megatron-LM
 python setup.py develop
+pip install regex
+conda install pybind11 -y
 
 cd ~
 
