@@ -46,6 +46,15 @@ conda install pybind11 -y
 
 cd ~
 
+# alpa
+conda create -n alpa -y
+conda activate megatronlm
+conda install python=3.9 -y
+conda install ipython -y
+pip3 install cupy-cuda116
+pip3 install alpa
+pip3 install jaxlib==0.3.22+cuda113.cudnn820 -f https://alpa-projects.github.io/wheels.html
+cd ~
 
 # voidrun
 conda create --name research --file research_conda.txt
