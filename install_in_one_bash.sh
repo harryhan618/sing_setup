@@ -21,21 +21,21 @@ conda init bash
 eval "$(conda shell.bash hook)"
 
 # megatronlm
-mkdir /home/aiscuser/Software
+mkdir $HOME/Software
 wget https://developer.download.nvidia.com/compute/cuda/11.6.0/local_installers/cuda_11.6.0_510.39.01_linux.run
-sh cuda_11.6.0_510.39.01_linux.run --silent --toolkit --installpath=/home/aiscuser/Software/cuda-11.6
-echo "export CUDA_HOME=/home/aiscuser/Software/cuda-11.6" >> /home/aiscuser/.bashrc
-echo "export PATH=/home/aiscuser/Software/cuda-11.6/bin:$PATH" >> /home/aiscuser/.bashrc
-echo "export LD_LIBRARY_PATH=/home/aiscuser/Software/cuda-11.6/lib64:$LD_LIBRARY_PATH" >> /home/aiscuser/.bashrc
+sh cuda_11.6.0_510.39.01_linux.run --silent --toolkit --installpath=$HOME/Software/cuda-11.6
+echo "export CUDA_HOME=$HOME/Software/cuda-11.6" >> $HOME/.bashrc
+echo "export PATH=$HOME/Software/cuda-11.6/bin:$PATH" >> $HOME/.bashrc
+echo "export LD_LIBRARY_PATH=$HOME/Software/cuda-11.6/lib64:$LD_LIBRARY_PATH" >> $HOME/.bashrc
 
 conda create -n megatronlm -y
-git clone https://github.com/NVIDIA/apex /home/aiscuser/Software/apex
+git clone https://github.com/NVIDIA/apex $HOME/Software/apex
 conda activate megatronlm
 conda install python=3.9 -y
 conda install ipython -y
 pip install packaging
 pip3 install numpy==1.23.5 torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
-cd /home/aiscuser/Software/apex
+cd $HOME/Software/apex
 python setup.py develop --cpp_ext --cuda_ext
 cd ~
 git clone https://github.com/NVIDIA/Megatron-LM
