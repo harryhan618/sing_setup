@@ -1,6 +1,6 @@
 echo "" >> ~/.profile
 echo "cd ~" >> ~/.profile
-echo "source ~/.bashrc" >> ~/.profile
+echo "source ~/.bashrc" | sudo tee -a ~/.profile
 
 cd ~
 
