@@ -48,7 +48,7 @@ cd ~
 
 # alpa
 conda create -n alpa -y
-conda activate megatronlm
+conda activate alpa
 conda install python=3.9 -y
 conda install ipython -y
 pip3 install cupy-cuda116
