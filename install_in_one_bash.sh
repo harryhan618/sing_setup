@@ -54,9 +54,10 @@ conda install ipython -y
 pip3 install cupy-cuda116
 pip3 install alpa
 pip3 install jaxlib==0.3.22+cuda113.cudnn820 -f https://alpa-projects.github.io/wheels.html
-cd ~
+
 
 # voidrun
+cd ~/sing_setup
 conda create --name research --file research_conda.txt
 conda activate research
 which python
