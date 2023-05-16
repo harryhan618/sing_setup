@@ -20,6 +20,7 @@ sudo apt install libnccl2 libnccl-dev
 conda init bash
 eval "$(conda shell.bash hook)"
 
+"""
 # megatronlm
 mkdir $HOME/Software
 wget https://developer.download.nvidia.com/compute/cuda/11.6.0/local_installers/cuda_11.6.0_510.39.01_linux.run
@@ -43,6 +44,7 @@ cd Megatron-LM
 python setup.py develop
 pip install regex
 conda install pybind11 -y
+"""
 
 cd ~
 
@@ -51,9 +53,12 @@ conda create -n alpa -y
 conda activate alpa
 conda install python=3.9 -y
 conda install ipython -y
-pip3 install cupy-cuda116
+pip3 install cupy-cuda113
 pip3 install alpa
 pip3 install jaxlib==0.3.22+cuda113.cudnn820 -f https://alpa-projects.github.io/wheels.html
+pip install numpy==1.23.5
+python -m cupyx.tools.install_library --cuda 11.3 --library nccl
+
 
 
 # voidrun

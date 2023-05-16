@@ -3,6 +3,17 @@ from inputimeout import inputimeout, TimeoutOccurred
 import torch
 import torchvision.models as models
 
+import subprocess
+
+def get_gpu_memory_usage():
+    """Return the current GPU memory usage in MB for the first GPU."""
+    result = subprocess.run(['nvidia-smi', '--id=0', '--query-gpu=memory.used', '--format=csv,nounits,noheader'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if result.returncode != 0:
+        raise RuntimeError("Failed to get GPU memory usage: " + result.stderr.decode('utf-8'))
+    output = result.stdout.decode('utf-8').strip()
+    memory_usage = int(output)
+    return memory_usage
+
 device_cnt =  torch.cuda.device_count()
 device = "cuda:{}".format(device_cnt-1)
 
