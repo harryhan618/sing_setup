@@ -35,7 +35,7 @@ conda activate megatronlm
 conda install python=3.9 -y
 conda install ipython -y
 pip install packaging
-pip3 install numpy==1.23.5 torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
+pip3 install numpy==1.23.5 torch==1.13 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
 cd $HOME/Software/apex
 python setup.py develop --cpp_ext --cuda_ext
 cd ~
