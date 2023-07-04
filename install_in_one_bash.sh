@@ -26,8 +26,8 @@ mkdir $HOME/Software
 wget https://developer.download.nvidia.com/compute/cuda/11.6.0/local_installers/cuda_11.6.0_510.39.01_linux.run
 sh cuda_11.6.0_510.39.01_linux.run --silent --toolkit --installpath=$HOME/Software/cuda-11.6
 echo "export CUDA_HOME=$HOME/Software/cuda-11.6" >> $HOME/.bashrc
-echo "export PATH=$HOME/Software/cuda-11.6/bin:$PATH" >> $HOME/.bashrc
-echo "export LD_LIBRARY_PATH=$HOME/Software/cuda-11.6/lib64:$LD_LIBRARY_PATH" >> $HOME/.bashrc
+echo "export PATH=$CUDA_HOME/bin:$PATH" >> $HOME/.bashrc
+echo "export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH" >> $HOME/.bashrc
 
 conda create -n megatronlm -y
 git clone https://github.com/NVIDIA/apex $HOME/Software/apex
