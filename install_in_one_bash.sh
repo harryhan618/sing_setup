@@ -10,10 +10,8 @@ sh Anaconda3-2023.09-0-Linux-x86_64.sh -b -p ~/anaconda && ~/anaconda/bin/conda 
 conda init bash
 eval "$(conda shell.bash hook)"
 
-
-alias proxyon="export http_proxy=http://127.0.0.1:10080;export https_proxy=http://127.0.0.1:10080"
-alias proxyoff="unset http_proxy;unset https_proxy"
-
+echo 'alias proxyon="export http_proxy=http://127.0.0.1:10080;export https_proxy=http://127.0.0.1:10080"' >> ~/.bashrc
+echo 'alias proxyoff="unset http_proxy;unset https_proxy"' >> ~/.bashrc
 
 # voidrun
 cd ~/sing_setup
