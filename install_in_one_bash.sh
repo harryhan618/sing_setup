@@ -2,6 +2,7 @@ apt update
 apt install -y vim 
 apt install -y git
 apt install -y tmux 
+apt install -y openssh-server
 
 wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
 sh Anaconda3-2023.09-0-Linux-x86_64.sh -b -p ./anaconda && ./anaconda/bin/conda init
