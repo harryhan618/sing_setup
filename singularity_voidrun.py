@@ -1,43 +1,46 @@
-import time
-from inputimeout import inputimeout, TimeoutOccurred
 import torch
-import torchvision.models as models
+from transformers import GenerationConfig, LlamaForCausalLM, LlamaModel, LlamaTokenizer
 
-import subprocess
-
-def get_gpu_memory_usage():
-    """Return the current GPU memory usage in MB for the first GPU."""
-    result = subprocess.run(['nvidia-smi', '--id=0', '--query-gpu=memory.used', '--format=csv,nounits,noheader'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if result.returncode != 0:
-        raise RuntimeError("Failed to get GPU memory usage: " + result.stderr.decode('utf-8'))
-    output = result.stdout.decode('utf-8').strip()
-    memory_usage = int(output)
-    return memory_usage
 
 device_cnt =  torch.cuda.device_count()
 device = "cuda:{}".format(device_cnt-1)
+device = "cuda"
+generation_config = dict(
+    temperature=0.2,
+    top_k=1,
+    top_p=1,
+    do_sample=True,
+    num_beams=1,
+    repetition_penalty=1.3,
+    max_new_tokens=100
+)
 
-def run():
-    idx = 0
-    while 1:
-        model = models.wide_resnet101_2().to(device)
-        x1 = torch.rand(32, 3, 224, 224).to(device)
-        x2 = torch.rand(32, 3, 224, 224).to(device)
-        x = x1 + x2
-        y = model(x)
-        idx += 1
-        if idx % 200 == 0:
-            print(idx)
+num_request = 64
+model_name = "meta-llama/Llama-2-7b-hf"
 
-        try:
-            string = inputimeout(prompt='Pause for a while?', timeout=0.3)
-            print("Sleep for 25 mins")
+tokenizer = LlamaTokenizer.from_pretrained(model_name)
+tokenizer.pad_token = '</s>'
 
-            return
-        except TimeoutOccurred:
-            pass
+input_prompt_list = ["why do we need to protect environment?"] * num_request
+
+
+
+model = LlamaForCausalLM.from_pretrained(model_name).to(device)
+
+
+
+def origin_batch_inference(model, tokenizer, input_texts, generation_config, device="cuda"):
+    with torch.no_grad():
+        inputs = tokenizer(input_texts, return_tensors="pt", padding=True)
+        generation_outputs = model.generate(
+                               input_ids = inputs["input_ids"].to(device),
+                               attention_mask = inputs['attention_mask'].to(device),
+                               eos_token_id=tokenizer.eos_token_id,
+                               pad_token_id=tokenizer.pad_token_id,
+                               **generation_config
+)
+
 
 while 1:
-    run()
-    torch.cuda.empty_cache()
-    time.sleep(60*25)
+    origin_batch_inference(model, tokenizer, input_prompt_list, generation_config)
+    print("Finish one request")
